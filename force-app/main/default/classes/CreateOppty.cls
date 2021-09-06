@@ -1,0 +1,17 @@
+public class CreateOppty {
+    @AuraEnabled
+    //Added comment flosum
+    public static Opportunity newOppty(String oppName, Id caseId) {
+        System.debug('Name: Scratch Org One' + oppName);
+        System.debug('caseId: Scratch Org ' + CaseId);
+        Case caseRecord = [Select AccountId FROM Case WHERE Id=:caseId];
+        Date d = Date.today().addMonths(1);
+        Opportunity newOpp = new Opportunity(Name=oppName, 
+                                             AccountId=caseRecord.AccountId, 
+                                             StageName='Perception Analysis', 
+                                             CloseDate=d);
+        
+        insert newOpp;
+        return newOpp;
+    }
+}
